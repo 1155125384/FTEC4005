@@ -1,6 +1,7 @@
 import csv
 import pandas
 import os,sys
+import time
 
 def csv_to_data(filename):
     file = open(filename)
@@ -22,3 +23,17 @@ def pandas_to_csv(df, filename):
         os.remove(path)
     df.to_csv(path, index=False, header=False)
     print("finished")
+
+def wait_csv(filename):
+    print("Wait for local storage to save csv...")
+    path = "./result/" + filename + ".csv"
+    timer = 0
+    while True:
+        time.sleep(1)
+        timer += 1
+        if os.path.exists(path):
+            print("Found: " + path)
+            break
+        else:
+            print("Timer: " + timer)
+            continue
